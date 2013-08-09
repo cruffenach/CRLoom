@@ -37,6 +37,58 @@
 <a name="motivations" class="anchor" href="#motivations"><span class="octicon octicon-link"></span></a>Motivations</h3>
 
 <p>When creating iOS applications, I regularly would make calls to web services, be delivered a collection of objects and need to create or update objects in my <code>NSManagedObjectContext</code> with the data. Commonly I would do this on the main thread and would notice my tableviews stutter, or for very large collections even freeze for a moment or two. To solve this I began doing my collection import work off of the main thread. I have generalized some of the patterns I used to move off the main thread into <code>CRLoom</code>, an unobtrusive framework for easing the pains of Core Data threading.</p>
+
+<h3>
+<a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick Start</h3>
+
+<p>If you have an existing application using Core Data your ready to use CRLoom. </p>
+
+<ol>
+<li>Create a category "import" for the <code>NSManagedObject</code> whose creation or updating you want to do on a background thread.</li>
+<li>In "import" implement</li>
+</ol><pre><code>+ (NSString*)uniqueDataIdentifierKey {
+    //The key for the unique identifier in the dictionary representing the object coming from your API
+}
+</code></pre>
+
+<pre><code>+ (NSString*)uniqueModelIdentifierKey {
+    //The key for the unique identifier in the NSManagedObject your are working in
+}
+</code></pre>
+
+<pre><code>- (BOOL)updateWithData:(NSDictionary*)data
+           intoContext:(NSManagedObjectContext*)moc
+             withCache:(NSCache*)cache
+                 error:(NSError**)error {                                
+    //Hydrate your core data object with the data from your API
+}
+</code></pre>
+
+<pre><code>- (BOOL)isIdenticalToData:(NSDictionary*)data {
+    //Check whether the NSManagedObject is already identical to the data handed down.
+}
+</code></pre>
+
+<ol>
+<li>Create an instance of <code>NSManagedObjectImportOperation</code> using </li>
+</ol><pre><code>+ (id)operationWithData:(id)data
+      managedModelClass:(Class)class
+       guaranteedInsert:(BOOL)guaranteedInsert
+       saveOnCompletion:(BOOL)saveOnCompletion
+               useCache:(BOOL)useCache
+                  error:(NSError**)error;
+</code></pre>
+
+<p>Provide the data to by snythesize, the NSManagedObject subclass in question. There are a few other options you can set for your specific needs. </p>
+
+<ol>
+<li>Add the operation into an <code>NSOperationQueue</code>. </li>
+</ol><p>The import of that data will now be done on a background thread, saved and merged into the main thread context.</p>
+
+<h3>
+<a name="continuted-development" class="anchor" href="#continuted-development"><span class="octicon octicon-link"></span></a>Continuted Development</h3>
+
+<p>I have found this to be useful for many of the threading use cases I have run into, but there is a lot of room to grow. Issues and Pulls welcome. Enjoy.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/cruffenach">cruffenach</a></p>
