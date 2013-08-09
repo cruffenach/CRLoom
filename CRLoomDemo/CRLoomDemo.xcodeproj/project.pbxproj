@@ -1,0 +1,553 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B256A46179B5B520053DD3C /* CRLoom.h in Resources */ = {isa = PBXBuildFile; fileRef = 0B256A44179B5B520053DD3C /* CRLoom.h */; };
+		0B256A47179B5B520053DD3C /* CRLoom.m in Resources */ = {isa = PBXBuildFile; fileRef = 0B256A45179B5B520053DD3C /* CRLoom.m */; };
+		0B256A48179B5D400053DD3C /* CRLoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B256A45179B5B520053DD3C /* CRLoom.m */; };
+		0B3B2239179B516100C21E8D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B2238179B516100C21E8D /* UIKit.framework */; };
+		0B3B223B179B516100C21E8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B223A179B516100C21E8D /* Foundation.framework */; };
+		0B3B223D179B516100C21E8D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B223C179B516100C21E8D /* CoreGraphics.framework */; };
+		0B3B223F179B516200C21E8D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B223E179B516100C21E8D /* CoreData.framework */; };
+		0B3B2245179B516200C21E8D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B3B2243179B516200C21E8D /* InfoPlist.strings */; };
+		0B3B2247179B516200C21E8D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B2246179B516200C21E8D /* main.m */; };
+		0B3B224B179B516200C21E8D /* CRLDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B224A179B516200C21E8D /* CRLDAppDelegate.m */; };
+		0B3B224D179B516200C21E8D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B3B224C179B516200C21E8D /* Default.png */; };
+		0B3B224F179B516200C21E8D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B3B224E179B516200C21E8D /* Default@2x.png */; };
+		0B3B2251179B516200C21E8D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B3B2250179B516200C21E8D /* Default-568h@2x.png */; };
+		0B3B225C179B516200C21E8D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B225B179B516200C21E8D /* SenTestingKit.framework */; };
+		0B3B225D179B516200C21E8D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B2238179B516100C21E8D /* UIKit.framework */; };
+		0B3B225E179B516200C21E8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B223A179B516100C21E8D /* Foundation.framework */; };
+		0B3B225F179B516200C21E8D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3B223E179B516100C21E8D /* CoreData.framework */; };
+		0B3B2267179B516200C21E8D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B3B2265179B516200C21E8D /* InfoPlist.strings */; };
+		0B3B226A179B516200C21E8D /* CRLoomDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B2269179B516200C21E8D /* CRLoomDemoTests.m */; };
+		0B3B2285179B53E300C21E8D /* CRTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B2284179B53E300C21E8D /* CRTableViewController.m */; };
+		0B3B2288179B543800C21E8D /* SampleData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B3B2287179B543800C21E8D /* SampleData.json */; };
+		0B3B228E179B548500C21E8D /* Person+Import.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B228B179B548500C21E8D /* Person+Import.m */; };
+		0B3B228F179B548500C21E8D /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B228D179B548500C21E8D /* Person.m */; };
+		0B3B2290179B55D300C21E8D /* NSManagedObject+CRLoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B227D179B536700C21E8D /* NSManagedObject+CRLoom.m */; };
+		0B3B2291179B55D300C21E8D /* NSManagedObjectImportOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B2277179B51A100C21E8D /* NSManagedObjectImportOperation.m */; };
+		0B3B2292179B568900C21E8D /* CRLoomDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B2252179B516200C21E8D /* CRLoomDemo.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0B3B2260179B516200C21E8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B3B222D179B516100C21E8D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0B3B2234179B516100C21E8D;
+			remoteInfo = CRLoomDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0B256A44179B5B520053DD3C /* CRLoom.h */ = {isa = PBXFileReference; lastKnownFileType = file; name = CRLoom.h; path = ../../CRLoom/CRLoom.h; sourceTree = "<group>"; };
+		0B256A45179B5B520053DD3C /* CRLoom.m */ = {isa = PBXFileReference; lastKnownFileType = file; name = CRLoom.m; path = ../../CRLoom/CRLoom.m; sourceTree = "<group>"; };
+		0B3B2235179B516100C21E8D /* CRLoomDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CRLoomDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B3B2238179B516100C21E8D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0B3B223A179B516100C21E8D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0B3B223C179B516100C21E8D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0B3B223E179B516100C21E8D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0B3B2242179B516200C21E8D /* CRLoomDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CRLoomDemo-Info.plist"; sourceTree = "<group>"; };
+		0B3B2244179B516200C21E8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0B3B2246179B516200C21E8D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0B3B2248179B516200C21E8D /* CRLoomDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CRLoomDemo-Prefix.pch"; sourceTree = "<group>"; };
+		0B3B2249179B516200C21E8D /* CRLDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRLDAppDelegate.h; sourceTree = "<group>"; };
+		0B3B224A179B516200C21E8D /* CRLDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRLDAppDelegate.m; sourceTree = "<group>"; };
+		0B3B224C179B516200C21E8D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		0B3B224E179B516200C21E8D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		0B3B2250179B516200C21E8D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0B3B2253179B516200C21E8D /* CRLoomDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CRLoomDemo.xcdatamodel; sourceTree = "<group>"; };
+		0B3B225A179B516200C21E8D /* CRLoomDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CRLoomDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B3B225B179B516200C21E8D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		0B3B2264179B516200C21E8D /* CRLoomDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CRLoomDemoTests-Info.plist"; sourceTree = "<group>"; };
+		0B3B2266179B516200C21E8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0B3B2268179B516200C21E8D /* CRLoomDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRLoomDemoTests.h; sourceTree = "<group>"; };
+		0B3B2269179B516200C21E8D /* CRLoomDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRLoomDemoTests.m; sourceTree = "<group>"; };
+		0B3B2276179B51A100C21E8D /* NSManagedObjectImportOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NSManagedObjectImportOperation.h; path = ../../CRLoom/NSManagedObjectImportOperation.h; sourceTree = "<group>"; };
+		0B3B2277179B51A100C21E8D /* NSManagedObjectImportOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = NSManagedObjectImportOperation.m; path = ../../CRLoom/NSManagedObjectImportOperation.m; sourceTree = "<group>"; };
+		0B3B227C179B536700C21E8D /* NSManagedObject+CRLoom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+CRLoom.h"; path = "../../CRLoom/NSManagedObject+CRLoom.h"; sourceTree = "<group>"; };
+		0B3B227D179B536700C21E8D /* NSManagedObject+CRLoom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+CRLoom.m"; path = "../../CRLoom/NSManagedObject+CRLoom.m"; sourceTree = "<group>"; };
+		0B3B2283179B53E300C21E8D /* CRTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRTableViewController.h; path = "View Controllers/CRTableViewController.h"; sourceTree = "<group>"; };
+		0B3B2284179B53E300C21E8D /* CRTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CRTableViewController.m; path = "View Controllers/CRTableViewController.m"; sourceTree = "<group>"; };
+		0B3B2287179B543800C21E8D /* SampleData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleData.json; sourceTree = "<group>"; };
+		0B3B228A179B548500C21E8D /* Person+Import.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Person+Import.h"; sourceTree = "<group>"; };
+		0B3B228B179B548500C21E8D /* Person+Import.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Person+Import.m"; sourceTree = "<group>"; };
+		0B3B228C179B548500C21E8D /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		0B3B228D179B548500C21E8D /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0B3B2232179B516100C21E8D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B3B2239179B516100C21E8D /* UIKit.framework in Frameworks */,
+				0B3B223B179B516100C21E8D /* Foundation.framework in Frameworks */,
+				0B3B223D179B516100C21E8D /* CoreGraphics.framework in Frameworks */,
+				0B3B223F179B516200C21E8D /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0B3B2256179B516200C21E8D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B3B225C179B516200C21E8D /* SenTestingKit.framework in Frameworks */,
+				0B3B225D179B516200C21E8D /* UIKit.framework in Frameworks */,
+				0B3B225E179B516200C21E8D /* Foundation.framework in Frameworks */,
+				0B3B225F179B516200C21E8D /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0B3B222C179B516100C21E8D = {
+			isa = PBXGroup;
+			children = (
+				0B3B2240179B516200C21E8D /* CRLoomDemo */,
+				0B3B2262179B516200C21E8D /* CRLoomDemoTests */,
+				0B3B2237179B516100C21E8D /* Frameworks */,
+				0B3B2236179B516100C21E8D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0B3B2236179B516100C21E8D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0B3B2235179B516100C21E8D /* CRLoomDemo.app */,
+				0B3B225A179B516200C21E8D /* CRLoomDemoTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0B3B2237179B516100C21E8D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B3B2238179B516100C21E8D /* UIKit.framework */,
+				0B3B223A179B516100C21E8D /* Foundation.framework */,
+				0B3B223C179B516100C21E8D /* CoreGraphics.framework */,
+				0B3B223E179B516100C21E8D /* CoreData.framework */,
+				0B3B225B179B516200C21E8D /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0B3B2240179B516200C21E8D /* CRLoomDemo */ = {
+			isa = PBXGroup;
+			children = (
+				0B3B2249179B516200C21E8D /* CRLDAppDelegate.h */,
+				0B3B224A179B516200C21E8D /* CRLDAppDelegate.m */,
+				0B3B2289179B548500C21E8D /* Core Data */,
+				0B3B2282179B539B00C21E8D /* View Controllers */,
+				0B3B2273179B517100C21E8D /* Vendor */,
+				0B3B2241179B516200C21E8D /* Supporting Files */,
+			);
+			path = CRLoomDemo;
+			sourceTree = "<group>";
+		};
+		0B3B2241179B516200C21E8D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0B3B2286179B543800C21E8D /* Assets */,
+				0B3B2242179B516200C21E8D /* CRLoomDemo-Info.plist */,
+				0B3B2243179B516200C21E8D /* InfoPlist.strings */,
+				0B3B2246179B516200C21E8D /* main.m */,
+				0B3B2248179B516200C21E8D /* CRLoomDemo-Prefix.pch */,
+				0B3B224C179B516200C21E8D /* Default.png */,
+				0B3B224E179B516200C21E8D /* Default@2x.png */,
+				0B3B2250179B516200C21E8D /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0B3B2262179B516200C21E8D /* CRLoomDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				0B3B2268179B516200C21E8D /* CRLoomDemoTests.h */,
+				0B3B2269179B516200C21E8D /* CRLoomDemoTests.m */,
+				0B3B2263179B516200C21E8D /* Supporting Files */,
+			);
+			path = CRLoomDemoTests;
+			sourceTree = "<group>";
+		};
+		0B3B2263179B516200C21E8D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0B3B2264179B516200C21E8D /* CRLoomDemoTests-Info.plist */,
+				0B3B2265179B516200C21E8D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0B3B2273179B517100C21E8D /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				0B256A44179B5B520053DD3C /* CRLoom.h */,
+				0B256A45179B5B520053DD3C /* CRLoom.m */,
+				0B3B227C179B536700C21E8D /* NSManagedObject+CRLoom.h */,
+				0B3B227D179B536700C21E8D /* NSManagedObject+CRLoom.m */,
+				0B3B2276179B51A100C21E8D /* NSManagedObjectImportOperation.h */,
+				0B3B2277179B51A100C21E8D /* NSManagedObjectImportOperation.m */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		0B3B2282179B539B00C21E8D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0B3B2283179B53E300C21E8D /* CRTableViewController.h */,
+				0B3B2284179B53E300C21E8D /* CRTableViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		0B3B2286179B543800C21E8D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				0B3B2287179B543800C21E8D /* SampleData.json */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		0B3B2289179B548500C21E8D /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				0B3B2252179B516200C21E8D /* CRLoomDemo.xcdatamodeld */,
+				0B3B228A179B548500C21E8D /* Person+Import.h */,
+				0B3B228B179B548500C21E8D /* Person+Import.m */,
+				0B3B228C179B548500C21E8D /* Person.h */,
+				0B3B228D179B548500C21E8D /* Person.m */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0B3B2234179B516100C21E8D /* CRLoomDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B3B226D179B516200C21E8D /* Build configuration list for PBXNativeTarget "CRLoomDemo" */;
+			buildPhases = (
+				0B3B2231179B516100C21E8D /* Sources */,
+				0B3B2232179B516100C21E8D /* Frameworks */,
+				0B3B2233179B516100C21E8D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CRLoomDemo;
+			productName = CRLoomDemo;
+			productReference = 0B3B2235179B516100C21E8D /* CRLoomDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0B3B2259179B516200C21E8D /* CRLoomDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B3B2270179B516200C21E8D /* Build configuration list for PBXNativeTarget "CRLoomDemoTests" */;
+			buildPhases = (
+				0B3B2255179B516200C21E8D /* Sources */,
+				0B3B2256179B516200C21E8D /* Frameworks */,
+				0B3B2257179B516200C21E8D /* Resources */,
+				0B3B2258179B516200C21E8D /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0B3B2261179B516200C21E8D /* PBXTargetDependency */,
+			);
+			name = CRLoomDemoTests;
+			productName = CRLoomDemoTests;
+			productReference = 0B3B225A179B516200C21E8D /* CRLoomDemoTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0B3B222D179B516100C21E8D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CRLD;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Notion;
+			};
+			buildConfigurationList = 0B3B2230179B516100C21E8D /* Build configuration list for PBXProject "CRLoomDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0B3B222C179B516100C21E8D;
+			productRefGroup = 0B3B2236179B516100C21E8D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0B3B2234179B516100C21E8D /* CRLoomDemo */,
+				0B3B2259179B516200C21E8D /* CRLoomDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0B3B2233179B516100C21E8D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B256A46179B5B520053DD3C /* CRLoom.h in Resources */,
+				0B3B2245179B516200C21E8D /* InfoPlist.strings in Resources */,
+				0B3B224D179B516200C21E8D /* Default.png in Resources */,
+				0B3B224F179B516200C21E8D /* Default@2x.png in Resources */,
+				0B256A47179B5B520053DD3C /* CRLoom.m in Resources */,
+				0B3B2251179B516200C21E8D /* Default-568h@2x.png in Resources */,
+				0B3B2288179B543800C21E8D /* SampleData.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0B3B2257179B516200C21E8D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B3B2267179B516200C21E8D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0B3B2258179B516200C21E8D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0B3B2231179B516100C21E8D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B3B2247179B516200C21E8D /* main.m in Sources */,
+				0B3B2292179B568900C21E8D /* CRLoomDemo.xcdatamodeld in Sources */,
+				0B3B224B179B516200C21E8D /* CRLDAppDelegate.m in Sources */,
+				0B3B2285179B53E300C21E8D /* CRTableViewController.m in Sources */,
+				0B3B228E179B548500C21E8D /* Person+Import.m in Sources */,
+				0B3B228F179B548500C21E8D /* Person.m in Sources */,
+				0B256A48179B5D400053DD3C /* CRLoom.m in Sources */,
+				0B3B2290179B55D300C21E8D /* NSManagedObject+CRLoom.m in Sources */,
+				0B3B2291179B55D300C21E8D /* NSManagedObjectImportOperation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0B3B2255179B516200C21E8D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B3B226A179B516200C21E8D /* CRLoomDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0B3B2261179B516200C21E8D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0B3B2234179B516100C21E8D /* CRLoomDemo */;
+			targetProxy = 0B3B2260179B516200C21E8D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0B3B2243179B516200C21E8D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0B3B2244179B516200C21E8D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0B3B2265179B516200C21E8D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0B3B2266179B516200C21E8D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0B3B226B179B516200C21E8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0B3B226C179B516200C21E8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0B3B226E179B516200C21E8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CRLoomDemo/CRLoomDemo-Prefix.pch";
+				INFOPLIST_FILE = "CRLoomDemo/CRLoomDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0B3B226F179B516200C21E8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CRLoomDemo/CRLoomDemo-Prefix.pch";
+				INFOPLIST_FILE = "CRLoomDemo/CRLoomDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		0B3B2271179B516200C21E8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CRLoomDemo.app/CRLoomDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CRLoomDemo/CRLoomDemo-Prefix.pch";
+				INFOPLIST_FILE = "CRLoomDemoTests/CRLoomDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0B3B2272179B516200C21E8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CRLoomDemo.app/CRLoomDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CRLoomDemo/CRLoomDemo-Prefix.pch";
+				INFOPLIST_FILE = "CRLoomDemoTests/CRLoomDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0B3B2230179B516100C21E8D /* Build configuration list for PBXProject "CRLoomDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B3B226B179B516200C21E8D /* Debug */,
+				0B3B226C179B516200C21E8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0B3B226D179B516200C21E8D /* Build configuration list for PBXNativeTarget "CRLoomDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B3B226E179B516200C21E8D /* Debug */,
+				0B3B226F179B516200C21E8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0B3B2270179B516200C21E8D /* Build configuration list for PBXNativeTarget "CRLoomDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B3B2271179B516200C21E8D /* Debug */,
+				0B3B2272179B516200C21E8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0B3B2252179B516200C21E8D /* CRLoomDemo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0B3B2253179B516200C21E8D /* CRLoomDemo.xcdatamodel */,
+			);
+			currentVersion = 0B3B2253179B516200C21E8D /* CRLoomDemo.xcdatamodel */;
+			name = CRLoomDemo.xcdatamodeld;
+			path = ../CRLoomDemo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 0B3B222D179B516100C21E8D /* Project object */;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:CRLoom"
+      name = "CRLoom">
+      <FileRef
+         location = "group:CRLoom.h">
+      </FileRef>
+      <FileRef
+         location = "group:CRLoom.m">
+      </FileRef>
+      <FileRef
+         location = "group:NSManagedObject+CRLoom.h">
+      </FileRef>
+      <FileRef
+         location = "group:NSManagedObject+CRLoom.m">
+      </FileRef>
+      <FileRef
+         location = "group:NSManagedObjectImportOperation.h">
+      </FileRef>
+      <FileRef
+         location = "group:NSManagedObjectImportOperation.m">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:CRLoomDemo/CRLoomDemo.xcodeproj">
+   </FileRef>
+</Workspace>
