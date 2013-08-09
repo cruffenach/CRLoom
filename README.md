@@ -1,6 +1,6 @@
 ## CRLoom
 
-CRLoom is a framework for helping with the import, update and querying of `NSManagedObject`'s
+CRLoom is a framework for helping with the import, update and querying of `NSManagedObject`s
 
 ## Overview
 
@@ -17,7 +17,7 @@ This is an `NSOperation` subclass that created via
 This operation can be added to an `NSOperationQueue` and will thread the work of importing the data. Setting `useCache` to `YES` will have the operation provide an `NSCache` to the thread doing the import work that will be used as a first layer to check to find existing objects before entire fetch requests are used.
 
 ### `NSManagedObject+CRLoom`
-This is a category that provides a generic implementation for importing and finding `NSManagedObject`'s. The import and search methods take an `NSManagedObjectContext` as a parameter so they can work on different threads.
+This is a category that provides a generic implementation for importing and finding `NSManagedObject`s. The import and search methods take an `NSManagedObjectContext` as a parameter so they can work on different threads.
 
 #### Importing Data
 
@@ -30,7 +30,7 @@ This is a category that provides a generic implementation for importing and find
                  error:(NSError**)error;
 ```
 
-A cache can be provided to be used as a first check place for existing objects when processing this data into `NSManagedObject`'s. Providing a cache here will ensure that those shared objects when created or retrieved for the first time will be held in a cache to reduce the total amount of fetch requests made.
+A cache can be provided to be used as a first check place for existing objects when processing this data into `NSManagedObject`s. Providing a cache here will ensure that those shared objects when created or retrieved for the first time will be held in a cache to reduce the total amount of fetch requests made.
 
 #### Finding Objects
 
