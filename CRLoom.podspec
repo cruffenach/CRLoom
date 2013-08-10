@@ -2,8 +2,8 @@ Pod::Spec.new do |s|
   s.name         = "CRLoom"
   s.version      = "0.1"
   s.license       = "MIT"
-  s.summary      = "Easy import, update and querying of NSManagedObject's"
-  s.description  = "CRLoom is a framework for helping with the import, update and querying of NSManagedObject's"
+  s.summary      = "Easy import, update and querying of NSManagedObjects"
+  s.description  = "CRLoom is a framework for helping with the import, update and querying of NSManagedObjects"
   s.homepage     = "https://github.com/cruffenach/CRLoom"
   s.author       = "Collin Ruffenach"
   

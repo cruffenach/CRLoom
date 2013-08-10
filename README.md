@@ -50,7 +50,7 @@ A method that returns the model (Core Data) key that represents the object's uni
 ```Objective-C
 + (NSString*)uniqueModelIdentifierKey;
 ```
-A method that returns the data (Simple API) key that represents the object's unique identifier
+A method that returns the key that represents the object's unique identifier in the data being imported (e.g. key in JSON from your API)
 ```Objective-C
 + (NSString*)uniqueDataIdentifierKey;
 ```
