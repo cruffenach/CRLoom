@@ -11,7 +11,7 @@
 @interface NSManagedObjectImportOperation : NSOperation
 
 + (id)operationWithData:(id)data
-      managedModelClass:(Class)class
+     managedObjectClass:(Class)class
        guaranteedInsert:(BOOL)guaranteedInsert
        saveOnCompletion:(BOOL)saveOnCompletion
                useCache:(BOOL)useCache

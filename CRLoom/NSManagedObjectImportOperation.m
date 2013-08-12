@@ -43,13 +43,13 @@ SEL NSManagedObjectImportSelector() {
 @implementation NSManagedObjectImportOperation
 
 + (id)operationWithData:(id)data
-      managedModelClass:(Class)class
+      managedObjectClass:(Class)class
        guaranteedInsert:(BOOL)guaranteedInsert
        saveOnCompletion:(BOOL)saveOnCompletion
                useCache:(BOOL)useCache
                   error:(NSError**)error {
     NSManagedObjectImportOperation *op = [[self alloc] initWithData:data
-                                                  managedModelClass:class
+                                                 managedObjectClass:class
                                                    guaranteedInsert:guaranteedInsert
                                                    saveOnCompletion:saveOnCompletion
                                                            useCache:useCache
@@ -58,7 +58,7 @@ SEL NSManagedObjectImportSelector() {
 }
 
 - (id)initWithData:(NSArray*)data
- managedModelClass:(Class)class
+managedObjectClass:(Class)class
   guaranteedInsert:(BOOL)guaranteedInsert
   saveOnCompletion:(BOOL)saveOnCompletion
           useCache:(BOOL)useCache

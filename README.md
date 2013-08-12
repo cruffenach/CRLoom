@@ -8,7 +8,7 @@ CRLoom is a framework for helping with the import, update and querying of `NSMan
 This is an `NSOperation` subclass that created via
 ```Objective-C
 + (id)operationWithData:(id)data
-      managedModelClass:(Class)class
+     managedObjectClass:(Class)class
        guaranteedInsert:(BOOL)guaranteedInsert
        saveOnCompletion:(BOOL)saveOnCompletion
                useCache:(BOOL)useCache

@@ -128,7 +128,7 @@ void generateRandomData() {
                                                     options:0
                                                       error:&error];
     NSManagedObjectImportOperation *importOperation = [NSManagedObjectImportOperation operationWithData:data
-                                                                                      managedModelClass:[Person class]
+                                                                                     managedObjectClass:[Person class]
                                                                                        guaranteedInsert:NO
                                                                                        saveOnCompletion:YES
                                                                                                useCache:NO
