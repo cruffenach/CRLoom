@@ -229,7 +229,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                      intoContext:(NSManagedObjectContext*)moc
                        withCache:(NSCache*)cache
                 guaranteedInsert:(BOOL)guaranteedInsert
-                saveOnCompletion:(BOOL)saveOnCompletion
+                 saveOnBatchSize:(NSUInteger)batchSize
                            error:(NSError**)error {
     
     NSDictionary *objects = guaranteedInsert ?
@@ -241,6 +241,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
     }
     
     NSMutableArray *returnObjects = [NSMutableArray arrayWithCapacity:data.count];
+    NSUInteger objectsAvailableToSave = 0;
     for (NSDictionary *objectData in data) {
         NSManagedObject *object = objects[objectData[[self uniqueDataIdentifierKey]]];
         if (![object isIdenticalToData:objectData]) {
@@ -252,9 +253,16 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
         } else {
             [returnObjects addObject:object];
         }
+        objectsAvailableToSave++;
+        
+        if (objectsAvailableToSave == batchSize) {
+            if (![moc save:error]) {
+                break;
+            }
+        }
     }
     
-    return saveOnCompletion ? [moc save:error] ? [NSArray arrayWithArray:returnObjects] : nil : [NSArray arrayWithArray:returnObjects];
+    return batchSize != 0 ? [moc save:error] ? [NSArray arrayWithArray:returnObjects] : nil : [NSArray arrayWithArray:returnObjects];
 }
 
 #pragma mark - Public Interface
@@ -263,7 +271,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
            intoContext:(NSManagedObjectContext*)moc
              withCache:(NSCache*)cache
       guaranteedInsert:(BOOL)guaranteedInsert
-      saveOnCompletion:(BOOL)saveOnCompletion
+       saveOnBatchSize:(NSUInteger)batchSize
                  error:(NSError**)error {
     
     if (!data) return nil;
@@ -273,14 +281,14 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                               intoContext:moc
                                 withCache:cache
                          guaranteedInsert:guaranteedInsert
-                         saveOnCompletion:saveOnCompletion
+                          saveOnBatchSize:batchSize
                                     error:error];
     } else if ([data isKindOfClass:[NSDictionary class]]) {
         return @[[self importObject:data
                         intoContext:moc
                           withCache:cache
                    guaranteedInsert:guaranteedInsert
-                   saveOnCompletion:saveOnCompletion
+                   saveOnCompletion:(batchSize != 0)
                               error:error]];
     }
     

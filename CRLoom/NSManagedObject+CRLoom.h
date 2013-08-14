@@ -79,9 +79,9 @@
  before performing a full fetch request to find an existing object
  @param guaranteedInsert A flag to optionally directly create these as new objects and
  skip the work of checking for an existing instance to update
- @param saveOnCompletion A flag which if YES will have the provided context save the
- imported data. If NO the managed objects will be created or update but the context
- will not be saved
+ @param batchSize The numbers of objects processed that should trigger a save to the 
+ managed object context. A value of 0 will have no save occur, a value of NSUIntegerMax
+ will have 1 save occur after processing all objects.
  @param error An error pointer that will be returned hydrated if there is any problem
  @return An array of the objects created
  */
@@ -90,7 +90,7 @@
            intoContext:(NSManagedObjectContext*)moc
              withCache:(NSCache*)cache
       guaranteedInsert:(BOOL)guaranteedInsert
-      saveOnCompletion:(BOOL)saveOnCompletion
+       saveOnBatchSize:(NSUInteger)batchSize
                  error:(NSError**)error;
 
 /**
