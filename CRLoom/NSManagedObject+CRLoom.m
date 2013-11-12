@@ -262,7 +262,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
         }
         objectsAvailableToSave++;
         
-        if (objectsAvailableToSave == batchSize) {
+        if (batchSize > 0 && objectsAvailableToSave == batchSize) {
             if (![moc save:error]) {
                 break;
             }
