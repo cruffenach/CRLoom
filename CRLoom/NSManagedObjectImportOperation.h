@@ -13,7 +13,7 @@
 + (id)operationWithData:(id)data
      managedObjectClass:(Class)class
        guaranteedInsert:(BOOL)guaranteedInsert
-       saveOnCompletion:(BOOL)saveOnCompletion
+        saveOnBatchSize:(NSUInteger)batchSize
                useCache:(BOOL)useCache
                   error:(NSError**)error;
 

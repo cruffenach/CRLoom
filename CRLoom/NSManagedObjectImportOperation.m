@@ -18,7 +18,7 @@
  *       intoContext:(NSManagedObjectContext*)moc
  *         withCache:(NSCache*)cache
  *  guaranteedInsert:(BOOL)guaranteedInsert
- *  saveOnCompletion:(BOOL)saveOnCompletion
+ *   saveOnBatchSize:(NSUInteger)batchSize
  *             error:(NSError**)error
  *
  *  This is the method through which NSManagedObject's can be created and updated.
@@ -26,7 +26,7 @@
 
 SEL NSManagedObjectImportSelector();
 SEL NSManagedObjectImportSelector() {
-    SEL importSelector = sel_registerName("importData:intoContext:withCache:guaranteedInsert:saveOnCompletion:error:");
+    SEL importSelector = sel_registerName("importData:intoContext:withCache:guaranteedInsert:saveOnBatchSize:error:");
     return importSelector;
 }
 
@@ -35,7 +35,7 @@ SEL NSManagedObjectImportSelector() {
 @property (nonatomic, retain) NSManagedObjectContext *moc;
 @property (nonatomic, retain) NSArray *data;
 @property (nonatomic, assign) Class targetClass;
-@property (nonatomic, assign) BOOL saveOnCompletion;
+@property (nonatomic, assign) NSUInteger batchSize;
 @property (nonatomic, assign) BOOL useCache;
 @property (nonatomic, retain) NSError *error;
 @end
@@ -43,15 +43,15 @@ SEL NSManagedObjectImportSelector() {
 @implementation NSManagedObjectImportOperation
 
 + (id)operationWithData:(id)data
-      managedObjectClass:(Class)class
+     managedObjectClass:(Class)class
        guaranteedInsert:(BOOL)guaranteedInsert
-       saveOnCompletion:(BOOL)saveOnCompletion
+        saveOnBatchSize:(NSUInteger)batchSize
                useCache:(BOOL)useCache
                   error:(NSError**)error {
     NSManagedObjectImportOperation *op = [[self alloc] initWithData:data
                                                  managedObjectClass:class
                                                    guaranteedInsert:guaranteedInsert
-                                                   saveOnCompletion:saveOnCompletion
+                                                    saveOnBatchSize:batchSize
                                                            useCache:useCache
                                                               error:error];
     return op;
@@ -60,7 +60,7 @@ SEL NSManagedObjectImportSelector() {
 - (id)initWithData:(NSArray*)data
 managedObjectClass:(Class)class
   guaranteedInsert:(BOOL)guaranteedInsert
-  saveOnCompletion:(BOOL)saveOnCompletion
+   saveOnBatchSize:(NSUInteger)batchSize
           useCache:(BOOL)useCache
              error:(NSError**)error {
     self = [super init];
@@ -68,6 +68,7 @@ managedObjectClass:(Class)class
         self.data = data;
         self.targetClass = class;
         self.guaranteedInsert = guaranteedInsert;
+        self.batchSize = batchSize;
         self.useCache = useCache;
         self.error = *error;
     }
@@ -87,7 +88,7 @@ managedObjectClass:(Class)class
     SEL importSelector = NSManagedObjectImportSelector();
     if (class_getClassMethod(self.targetClass, importSelector) != NULL) {
         NSCache *cache = self.useCache ? [[NSCache alloc] init] : nil ;
-        objc_msgSend(self.targetClass, importSelector, self.data, self.moc, cache, self.guaranteedInsert, YES, &_error);
+        objc_msgSend(self.targetClass, importSelector, self.data, self.moc, cache, self.guaranteedInsert, self.batchSize, &_error);
     } else {
         NSAssert(NO, @"The object of type %@ supplied to NSManagedObjectImportOperation doesn't respond to %@", NSStringFromClass(self.targetClass), NSStringFromSelector(importSelector));
     }

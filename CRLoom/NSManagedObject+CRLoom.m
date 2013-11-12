@@ -259,6 +259,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
             if (![moc save:error]) {
                 break;
             }
+            objectsAvailableToSave = 0;
         }
     }
     
@@ -295,7 +296,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
     if (error) {
         *error = [NSError errorWithDomain:@"com.CRLoom.import"
                                      code:0
-                                 userInfo:@{@"description" : [NSString stringWithFormat:@"The data you handed importData:intoContext:guaranteedInsert:saveOnCompletion:error: was of type %@, only NSArray and NSDictionary data is accepted", NSStringFromClass([data class])]}];
+                                 userInfo:@{@"description" : [NSString stringWithFormat:@"The data you handed importData:intoContext:guaranteedInsert:saveOnBatchSize:error: was of type %@, only NSArray and NSDictionary data is accepted", NSStringFromClass([data class])]}];
         
     }
     return nil;
