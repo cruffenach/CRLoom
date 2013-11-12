@@ -45,7 +45,14 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 #pragma mark - Cache Helpers
 
 + (NSString*)cacheKeyForIdentifierValue:(id)identifierValue {
-    return [NSString stringWithFormat:@"%@-%@-%@", NSStringFromClass([self class]), [self uniqueModelIdentifierKey], identifierValue];
+    NSString *className = NSStringFromClass([self class]);
+    NSString *uniqueModelIdentifierKey = [self uniqueModelIdentifierKey];
+    NSString *uniqueModelIdentifierValue = [identifierValue description];
+    char *buffer;
+    asprintf(&buffer, "%s-%s-%s", [className UTF8String], [uniqueModelIdentifierKey UTF8String], [uniqueModelIdentifierValue UTF8String]);
+    NSString *hash = [NSString stringWithCString:buffer encoding:NSUTF8StringEncoding];
+    free(buffer);
+    return hash;
 }
 
 + (id)objectFromCache:(NSCache*)cache identifierValue:(id)identifierValue {
