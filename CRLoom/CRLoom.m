@@ -23,13 +23,18 @@
 - (void)setMoc:(NSManagedObjectContext *)moc {
     _moc = moc;
     __block CRLoom *blockSelf = self;
-    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification* note) {
-                                                      CRLogCoreDataNote(note);
-                                                      [blockSelf.moc mergeChangesFromContextDidSaveNotification:note];
-                                                  }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification* note) {
+        CRLogCoreDataNote(note);
+
+        //Fix for bug where NSFetchedResultsControllerDelegate's controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:
+        //isn't called when updates come in from a Managed Object Context on another thread.
+        //http://stackoverflow.com/questions/14018068/nsfetchedresultscontroller-doesnt-call-controllerdidchangecontent-after-update
+        for(NSManagedObject *object in [[note userInfo] objectForKey:NSUpdatedObjectsKey]) {
+            [[blockSelf.moc objectWithID:[object objectID]] willAccessValueForKey:nil];
+        }
+        
+        [blockSelf.moc mergeChangesFromContextDidSaveNotification:note];
+    }];
 }
 
 + (CRLoom*)loom {
