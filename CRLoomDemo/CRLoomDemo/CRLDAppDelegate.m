@@ -128,36 +128,49 @@ void generateRandomData() {
     [[NSJSONSerialization dataWithJSONObject:@{@"jobs" : jobsData, @"people" : people} options:NSJSONWritingPrettyPrinted error:&error] writeToFile:[NSHomeDirectory() stringByAppendingPathComponent:@"data.json"] atomically:YES];
 }
 
-- (void)importData {
+- (void)importData:(BOOL)thread useCache:(BOOL)useCache {
     __autoreleasing NSError *error = nil;
     NSDictionary *data = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"SampleData"
                                                                                                                                                       ofType:@"json"]]]
                                                          options:0
                                                            error:&error];
-    
-    NSManagedObjectImportOperation *jobOperation = [NSManagedObjectImportOperation operationWithData:data[@"jobs"]
-                                                                                  managedObjectClass:[Job class]
-                                                                                    guaranteedInsert:NO
-                                                                                     saveOnBatchSize:25
-                                                                                            useCache:NO
-                                                                                               error:&error];
-    
-    NSManagedObjectImportOperation *peopleImportOperation = [NSManagedObjectImportOperation operationWithData:data[@"people"]
-                                                                                           managedObjectClass:[Person class]
-                                                                                             guaranteedInsert:NO
-                                                                                              saveOnBatchSize:25
-                                                                                                     useCache:NO
-                                                                                                        error:&error];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [queue addOperation:jobOperation];
-    [queue addOperation:peopleImportOperation];
+    if (thread) {
+        NSManagedObjectImportOperation *jobOperation = [NSManagedObjectImportOperation operationWithData:data[@"jobs"]
+                                                                                      managedObjectClass:[Job class]
+                                                                                        guaranteedInsert:NO
+                                                                                         saveOnBatchSize:25
+                                                                                                useCache:NO
+                                                                                                   error:&error];
+        
+        NSManagedObjectImportOperation *peopleImportOperation = [NSManagedObjectImportOperation operationWithData:data[@"people"]
+                                                                                               managedObjectClass:[Person class]
+                                                                                                 guaranteedInsert:NO
+                                                                                                  saveOnBatchSize:25
+                                                                                                         useCache:useCache
+                                                                                                            error:&error];
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        [queue addOperation:jobOperation];
+        [queue addOperation:peopleImportOperation];
+    } else {
+        [Job importData:data[@"jobs"]
+            intoContext:[self managedObjectContext]
+              withCache:nil
+       guaranteedInsert:YES
+        saveOnBatchSize:25
+                  error:&error];
+        [Person importData:data[@"people"]
+               intoContext:[self managedObjectContext]
+                 withCache:nil
+          guaranteedInsert:YES
+           saveOnBatchSize:25
+                     error:&error];
+    }
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [CRLoom setMainThreadManagedObjectContext:[self managedObjectContext]];
-//    generateRandomData();
-    [self importData];
+    [self importData:YES useCache:YES];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
