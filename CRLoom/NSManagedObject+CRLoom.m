@@ -284,6 +284,10 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
     
     if (!data) return nil;
     
+    if ([data isKindOfClass:[NSSet class]]) {
+        data = [(NSSet*)data allObjects];
+    }
+    
     if ([data isKindOfClass:[NSArray class]]) {
         return [self importDataCollection:data
                               intoContext:moc
@@ -303,7 +307,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
     if (error) {
         *error = [NSError errorWithDomain:@"com.CRLoom.import"
                                      code:0
-                                 userInfo:@{@"description" : [NSString stringWithFormat:@"The data you handed importData:intoContext:guaranteedInsert:saveOnBatchSize:error: was of type %@, only NSArray and NSDictionary data is accepted", NSStringFromClass([data class])]}];
+                                 userInfo:@{@"description" : [NSString stringWithFormat:@"The data you handed importData:intoContext:guaranteedInsert:saveOnBatchSize:error: was of type %@, only NSArray, NSSet and NSDictionary data is accepted", NSStringFromClass([data class])]}];
         
     }
     return nil;
