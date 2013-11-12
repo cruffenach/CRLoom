@@ -99,7 +99,7 @@ NSArray * jobs() {
              @"Investor",
              @"Painter",
              @"Mechanic",
-             @"Carpender",
+             @"Carpenter",
              @"HR Rep"];
 }
 
