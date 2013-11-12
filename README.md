@@ -10,7 +10,7 @@ This is an `NSOperation` subclass that created via
 + (id)operationWithData:(id)data
      managedObjectClass:(Class)class
        guaranteedInsert:(BOOL)guaranteedInsert
-       saveOnCompletion:(BOOL)saveOnCompletion
+				saveOnBatchSize:(NSUInteger)batchSize
                useCache:(BOOL)useCache
                   error:(NSError**)error;
 ```
@@ -26,7 +26,7 @@ This is a category that provides a generic implementation for importing and find
            intoContext:(NSManagedObjectContext*)moc
              withCache:(NSCache*)cache
       guaranteedInsert:(BOOL)guaranteedInsert
-      saveOnCompletion:(BOOL)saveOnCompletion
+			 saveOnBatchSize:(NSUInteger)batchSize
                  error:(NSError**)error;
 ```
 
