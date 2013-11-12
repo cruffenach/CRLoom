@@ -130,7 +130,7 @@ void generateRandomData() {
     NSManagedObjectImportOperation *importOperation = [NSManagedObjectImportOperation operationWithData:data
                                                                                      managedObjectClass:[Person class]
                                                                                        guaranteedInsert:NO
-                                                                                       saveOnCompletion:YES
+                                                                                        saveOnBatchSize:25
                                                                                                useCache:NO
                                                                                                   error:&error];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
