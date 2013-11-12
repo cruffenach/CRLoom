@@ -27,12 +27,14 @@
 		0B3B2267179B516200C21E8D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B3B2265179B516200C21E8D /* InfoPlist.strings */; };
 		0B3B226A179B516200C21E8D /* CRLoomDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B2269179B516200C21E8D /* CRLoomDemoTests.m */; };
 		0B3B2285179B53E300C21E8D /* CRTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B2284179B53E300C21E8D /* CRTableViewController.m */; };
-		0B3B2288179B543800C21E8D /* SampleData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B3B2287179B543800C21E8D /* SampleData.json */; };
 		0B3B228E179B548500C21E8D /* Person+Import.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B228B179B548500C21E8D /* Person+Import.m */; };
-		0B3B228F179B548500C21E8D /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B228D179B548500C21E8D /* Person.m */; };
 		0B3B2290179B55D300C21E8D /* NSManagedObject+CRLoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B227D179B536700C21E8D /* NSManagedObject+CRLoom.m */; };
 		0B3B2291179B55D300C21E8D /* NSManagedObjectImportOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B2277179B51A100C21E8D /* NSManagedObjectImportOperation.m */; };
 		0B3B2292179B568900C21E8D /* CRLoomDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B3B2252179B516200C21E8D /* CRLoomDemo.xcdatamodeld */; };
+		0B921815183207FC00920E1F /* SampleData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B921814183207FC00920E1F /* SampleData.json */; };
+		0B921818183208A500920E1F /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B921817183208A500920E1F /* Person.m */; };
+		0B92181B183208A600920E1F /* Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B92181A183208A600920E1F /* Job.m */; };
+		0B92181E183208B500920E1F /* Job+Import.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B92181D183208B500920E1F /* Job+Import.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B256A44179B5B520053DD3C /* CRLoom.h */ = {isa = PBXFileReference; lastKnownFileType = file; name = CRLoom.h; path = ../../CRLoom/CRLoom.h; sourceTree = "<group>"; };
-		0B256A45179B5B520053DD3C /* CRLoom.m */ = {isa = PBXFileReference; lastKnownFileType = file; name = CRLoom.m; path = ../../CRLoom/CRLoom.m; sourceTree = "<group>"; };
+		0B256A44179B5B520053DD3C /* CRLoom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CRLoom.h; path = ../../CRLoom/CRLoom.h; sourceTree = "<group>"; };
+		0B256A45179B5B520053DD3C /* CRLoom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CRLoom.m; path = ../../CRLoom/CRLoom.m; sourceTree = "<group>"; };
 		0B3B2235179B516100C21E8D /* CRLoomDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CRLoomDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B3B2238179B516100C21E8D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0B3B223A179B516100C21E8D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -75,11 +77,15 @@
 		0B3B227D179B536700C21E8D /* NSManagedObject+CRLoom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+CRLoom.m"; path = "../../CRLoom/NSManagedObject+CRLoom.m"; sourceTree = "<group>"; };
 		0B3B2283179B53E300C21E8D /* CRTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CRTableViewController.h; path = "View Controllers/CRTableViewController.h"; sourceTree = "<group>"; };
 		0B3B2284179B53E300C21E8D /* CRTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CRTableViewController.m; path = "View Controllers/CRTableViewController.m"; sourceTree = "<group>"; };
-		0B3B2287179B543800C21E8D /* SampleData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleData.json; sourceTree = "<group>"; };
 		0B3B228A179B548500C21E8D /* Person+Import.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Person+Import.h"; sourceTree = "<group>"; };
 		0B3B228B179B548500C21E8D /* Person+Import.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Person+Import.m"; sourceTree = "<group>"; };
-		0B3B228C179B548500C21E8D /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
-		0B3B228D179B548500C21E8D /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		0B921814183207FC00920E1F /* SampleData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleData.json; sourceTree = "<group>"; };
+		0B921816183208A500920E1F /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		0B921817183208A500920E1F /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		0B921819183208A600920E1F /* Job.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Job.h; sourceTree = "<group>"; };
+		0B92181A183208A600920E1F /* Job.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Job.m; sourceTree = "<group>"; };
+		0B92181C183208B500920E1F /* Job+Import.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Job+Import.h"; sourceTree = "<group>"; };
+		0B92181D183208B500920E1F /* Job+Import.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Job+Import.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,7 +217,7 @@
 		0B3B2286179B543800C21E8D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				0B3B2287179B543800C21E8D /* SampleData.json */,
+				0B921814183207FC00920E1F /* SampleData.json */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -220,10 +226,14 @@
 			isa = PBXGroup;
 			children = (
 				0B3B2252179B516200C21E8D /* CRLoomDemo.xcdatamodeld */,
+				0B921819183208A600920E1F /* Job.h */,
+				0B92181A183208A600920E1F /* Job.m */,
+				0B921816183208A500920E1F /* Person.h */,
+				0B921817183208A500920E1F /* Person.m */,
 				0B3B228A179B548500C21E8D /* Person+Import.h */,
 				0B3B228B179B548500C21E8D /* Person+Import.m */,
-				0B3B228C179B548500C21E8D /* Person.h */,
-				0B3B228D179B548500C21E8D /* Person.m */,
+				0B92181C183208B500920E1F /* Job+Import.h */,
+				0B92181D183208B500920E1F /* Job+Import.m */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -301,12 +311,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B256A46179B5B520053DD3C /* CRLoom.h in Resources */,
+				0B921815183207FC00920E1F /* SampleData.json in Resources */,
 				0B3B2245179B516200C21E8D /* InfoPlist.strings in Resources */,
 				0B3B224D179B516200C21E8D /* Default.png in Resources */,
 				0B3B224F179B516200C21E8D /* Default@2x.png in Resources */,
 				0B256A47179B5B520053DD3C /* CRLoom.m in Resources */,
 				0B3B2251179B516200C21E8D /* Default-568h@2x.png in Resources */,
-				0B3B2288179B543800C21E8D /* SampleData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,13 +351,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B92181E183208B500920E1F /* Job+Import.m in Sources */,
 				0B3B2247179B516200C21E8D /* main.m in Sources */,
 				0B3B2292179B568900C21E8D /* CRLoomDemo.xcdatamodeld in Sources */,
 				0B3B224B179B516200C21E8D /* CRLDAppDelegate.m in Sources */,
 				0B3B2285179B53E300C21E8D /* CRTableViewController.m in Sources */,
 				0B3B228E179B548500C21E8D /* Person+Import.m in Sources */,
-				0B3B228F179B548500C21E8D /* Person.m in Sources */,
+				0B92181B183208A600920E1F /* Job.m in Sources */,
 				0B256A48179B5D400053DD3C /* CRLoom.m in Sources */,
+				0B921818183208A500920E1F /* Person.m in Sources */,
 				0B3B2290179B55D300C21E8D /* NSManagedObject+CRLoom.m in Sources */,
 				0B3B2291179B55D300C21E8D /* NSManagedObjectImportOperation.m in Sources */,
 			);

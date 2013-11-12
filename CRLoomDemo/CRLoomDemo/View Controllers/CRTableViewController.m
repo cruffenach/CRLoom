@@ -29,7 +29,7 @@
 - (void)configureCell:(UITableViewCell*)cell inTableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath {
     Person *person = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = person.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Age: %@ Job: %@ ID: %@", person.age, person.job, person.uuid];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Age: %@ Job: %@ ID: %@", person.age, person.job.name, person.uuid];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

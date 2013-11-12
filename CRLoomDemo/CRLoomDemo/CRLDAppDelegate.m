@@ -103,43 +103,60 @@ NSArray * jobs() {
              @"HR Rep"];
 }
 
-NSString * randomJob() {
-    return randomObject(jobs());
+NSInteger randomJobID() {
+    return arc4random() % jobs().count;
 }
 
 void generateRandomData() {
     NSInteger numberOfObjects = 1000;
-    NSMutableArray *data = [NSMutableArray arrayWithCapacity:numberOfObjects];
+    
+    NSMutableArray *jobsData = [@[] mutableCopy];
+    for (int i = 0; i < jobs().count; i++) {
+        jobsData[i] = @{@"id"    : @(i),
+                       @"name"  : jobs()[i]};
+    }
+    
+    NSMutableArray *people = [NSMutableArray arrayWithCapacity:numberOfObjects];
     for (int i = 0; i < 1000; i++) {
-        data[i] = @{@"id"   : @(i),
-                    @"name" : randomName(),
-                    @"job"  : randomJob(),
-                    @"age"  : @(arc4random() % 100)};
+        people[i] = @{@"id"   : @(i),
+                      @"name" : randomName(),
+                      @"job"  : @(randomJobID()),
+                      @"age"  : @(arc4random() % 100)};
     }
     
     __autoreleasing NSError *error = nil;
-    [[NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:&error] writeToFile:[NSHomeDirectory() stringByAppendingPathComponent:@"data.json"] atomically:YES];
+    [[NSJSONSerialization dataWithJSONObject:@{@"jobs" : jobsData, @"people" : people} options:NSJSONWritingPrettyPrinted error:&error] writeToFile:[NSHomeDirectory() stringByAppendingPathComponent:@"data.json"] atomically:YES];
 }
 
 - (void)importData {
     __autoreleasing NSError *error = nil;
-    NSArray *data = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"SampleData"
-                                                                                                                                                 ofType:@"json"]]]
-                                                    options:0
-                                                      error:&error];
-    NSManagedObjectImportOperation *importOperation = [NSManagedObjectImportOperation operationWithData:data
-                                                                                     managedObjectClass:[Person class]
-                                                                                       guaranteedInsert:NO
-                                                                                        saveOnBatchSize:25
-                                                                                               useCache:NO
-                                                                                                  error:&error];
+    NSDictionary *data = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"SampleData"
+                                                                                                                                                      ofType:@"json"]]]
+                                                         options:0
+                                                           error:&error];
+    
+    NSManagedObjectImportOperation *jobOperation = [NSManagedObjectImportOperation operationWithData:data[@"jobs"]
+                                                                                  managedObjectClass:[Job class]
+                                                                                    guaranteedInsert:NO
+                                                                                     saveOnBatchSize:25
+                                                                                            useCache:NO
+                                                                                               error:&error];
+    
+    NSManagedObjectImportOperation *peopleImportOperation = [NSManagedObjectImportOperation operationWithData:data[@"people"]
+                                                                                           managedObjectClass:[Person class]
+                                                                                             guaranteedInsert:NO
+                                                                                              saveOnBatchSize:25
+                                                                                                     useCache:NO
+                                                                                                        error:&error];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [queue addOperation:importOperation];
+    [queue addOperation:jobOperation];
+    [queue addOperation:peopleImportOperation];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [CRLoom setMainThreadManagedObjectContext:[self managedObjectContext]];
+//    generateRandomData();
     [self importData];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

@@ -7,6 +7,7 @@
 //
 
 #import "Person+Import.h"
+#import "Job+Import.h"
 
 @implementation Person (Import)
 
@@ -21,7 +22,7 @@
 - (BOOL)isIdenticalToData:(NSDictionary*)data {
     return (self.uuid.integerValue == [data[[Person uniqueDataIdentifierKey]] integerValue] &&
             [self.name isEqualToString:data[@"name"]]                                       &&
-            [self.job isEqualToString:data[@"job"]]                                         &&
+            self.job.uuid.integerValue == [data[@"job"] integerValue]                       &&
             self.age.integerValue == [data[@"age"] integerValue]);
 }
 
@@ -31,7 +32,10 @@
                  error:(NSError **)error {    
     self.uuid = data[[Person uniqueDataIdentifierKey]];
     self.name = data[@"name"];
-    self.job = data[@"job"];
+    self.job = [Job existingObjectWithIdentifierValue:data[@"job"]
+                                            inContext:moc
+                                            withCache:cache
+                                                error:error];
     self.age = data[@"age"];
     return YES;
 }

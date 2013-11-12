@@ -1,30 +1,20 @@
 //
 //  Person.h
-//  CRCoreDataThreader-iOS-Demo
+//  CRLoomDemo
 //
-//  Created by Collin Ruffenach on 7/18/13.
-//
+//  Created by Collin Ruffenach on 11/11/13.
+//  Copyright (c) 2013 Notion. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "NSManagedObject+CRLoom.h"
-
-@class Person;
+#import "Job.h"
 
 @interface Person : NSManagedObject
-@property (nonatomic, retain) NSNumber * uuid;
-@property (nonatomic, retain) NSString * name;
+
 @property (nonatomic, retain) NSNumber * age;
-@property (nonatomic, retain) NSString * job;
-@property (nonatomic, retain) NSSet *friends;
-@end
-
-@interface Person (CoreDataGeneratedAccessors)
-
-- (void)addFriendsObject:(Person *)value;
-- (void)removeFriendsObject:(Person *)value;
-- (void)addFriends:(NSSet *)values;
-- (void)removeFriends:(NSSet *)values;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * uuid;
+@property (nonatomic, retain) Job *job;
 
 @end
