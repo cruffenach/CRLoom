@@ -56,6 +56,7 @@
     if (!_fetchedResultsController) {
         NSManagedObjectContext *moc = [(CRLDAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
         NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Person"];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name != %@", nil];
         fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES], [[NSSortDescriptor alloc] initWithKey:@"uuid" ascending:YES]];
         
         NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
