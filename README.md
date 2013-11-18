@@ -12,7 +12,7 @@ This is an `NSOperation` subclass that created via
        guaranteedInsert:(BOOL)guaranteedInsert
         saveOnBatchSize:(NSUInteger)batchSize
                useCache:(BOOL)useCache
-                  error:(NSError**)error;
+                  error:(NSError* __autoreleasing *)error;
 ```
 This operation can be added to an `NSOperationQueue` and will thread the work of importing the data. Setting `useCache` to `YES` will have the operation provide an `NSCache` to the thread doing the import work that will be used as a first layer to check to find existing objects before entire fetch requests are used.
 
@@ -27,7 +27,7 @@ This is a category that provides a generic implementation for importing and find
              withCache:(NSCache*)cache
       guaranteedInsert:(BOOL)guaranteedInsert
        saveOnBatchSize:(NSUInteger)batchSize
-                 error:(NSError**)error;
+                 error:(NSError* __autoreleasing *)error;
 ```
 
 A cache can be provided to be used as a first check place for existing objects when processing this data into `NSManagedObject`s. Providing a cache here will ensure that those shared objects when created or retrieved for the first time will be held in a cache to reduce the total amount of fetch requests made.
@@ -38,7 +38,7 @@ A cache can be provided to be used as a first check place for existing objects w
 + (instancetype)existingObjectWithIdentifierValue:(id)value
                                         inContext:(NSManagedObjectContext*)moc
                                         withCache:(NSCache*)cache
-                                            error:(NSError**)error;
+                                            error:(NSError* __autoreleasing *)error;
 ```     
 ### `<CRLoomImport>`
                                                         
