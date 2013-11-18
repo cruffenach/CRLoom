@@ -102,7 +102,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 + (id)findObjectWithData:(NSDictionary*)data
                inContext:(NSManagedObjectContext*)moc
                withCache:(NSCache*)cache
-                   error:(NSError**)error {
+                   error:(NSError* __autoreleasing *)error {
     id identifierValue = data[[self uniqueDataIdentifierKey]];
     id object = [self objectFromCache:cache identifierValue:identifierValue];
     if (!object) {
@@ -119,7 +119,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 + (NSArray*)findObjectsInIdentifierCollection:(NSArray*)identifierCollection
                                     inContext:(NSManagedObjectContext*)moc
                                     withCache:(NSCache*)cache
-                                        error:(NSError**)error {
+                                        error:(NSError* __autoreleasing *)error {
     NSMutableArray *identifiers = [NSMutableArray arrayWithArray:identifierCollection];
     NSMutableArray *objects = [NSMutableArray array];
     for (id identifierValue in identifierCollection) {
@@ -162,7 +162,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 + (NSManagedObject*)findOrCreateObjectWithData:(NSDictionary*)data
                                     inContext:(NSManagedObjectContext*)moc
                                     withCache:(NSCache*)cache
-                                        error:(NSError**)error {
+                                        error:(NSError* __autoreleasing *)error {
     __autoreleasing NSError *myError = nil;
     
     //I want to ensure I find out about an error that occurs in findObjectWithData:inContext:error: even if the user
@@ -181,7 +181,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 + (NSDictionary*)findOrCreateObjectsWithData:(NSArray*)data
                                    inContext:(NSManagedObjectContext*)moc
                                    withCache:(NSCache*)cache
-                                       error:(NSError**)error {
+                                       error:(NSError* __autoreleasing *)error {
     __autoreleasing NSError *myError = nil;
     NSArray *identifierValues = CRIdentifierValuesFromDataWithKey(data, [self uniqueDataIdentifierKey]);
     
@@ -218,7 +218,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                       withCache:(NSCache*)cache
                guaranteedInsert:(BOOL)guaranteedInsert
                saveOnCompletion:(BOOL)saveOnCompletion
-                          error:(NSError**)error {
+                          error:(NSError* __autoreleasing *)error {
     
     NSManagedObject *object = guaranteedInsert ?
     [self createObjectInContext:moc] :
@@ -237,7 +237,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                        withCache:(NSCache*)cache
                 guaranteedInsert:(BOOL)guaranteedInsert
                  saveOnBatchSize:(NSUInteger)batchSize
-                           error:(NSError**)error {
+                           error:(NSError* __autoreleasing *)error {
     
     NSDictionary *objects = guaranteedInsert ?
     [self createObjectsWithData:data inContext:moc withCache:cache] :
@@ -280,7 +280,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
              withCache:(NSCache*)cache
       guaranteedInsert:(BOOL)guaranteedInsert
        saveOnBatchSize:(NSUInteger)batchSize
-                 error:(NSError**)error {
+                 error:(NSError* __autoreleasing *)error {
     
     if (!data) return nil;
     
@@ -316,7 +316,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 + (instancetype)existingObjectWithIdentifierValue:(id)value
                                         inContext:(NSManagedObjectContext*)moc
                                         withCache:(NSCache*)cache
-                                            error:(NSError**)error {
+                                            error:(NSError* __autoreleasing *)error {
     return [self findObjectWithData:@{[self uniqueDataIdentifierKey] : value}
                           inContext:moc
                           withCache:cache
@@ -326,7 +326,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 + (NSArray*)existingObjectsWithIdentifierCollection:(NSArray*)identifierCollection
                                           inContext:(NSManagedObjectContext*)moc
                                           withCache:(NSCache*)cache
-                                              error:(NSError**)error {
+                                              error:(NSError* __autoreleasing *)error {
     return [self findObjectsInIdentifierCollection:identifierCollection
                                          inContext:moc
                                          withCache:cache

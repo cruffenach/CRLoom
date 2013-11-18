@@ -15,6 +15,6 @@
        guaranteedInsert:(BOOL)guaranteedInsert
         saveOnBatchSize:(NSUInteger)batchSize
                useCache:(BOOL)useCache
-                  error:(NSError**)error;
+                  error:(NSError* __autoreleasing *)error;
 
 @end

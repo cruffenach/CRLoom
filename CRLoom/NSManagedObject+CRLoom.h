@@ -91,7 +91,7 @@
              withCache:(NSCache*)cache
       guaranteedInsert:(BOOL)guaranteedInsert
        saveOnBatchSize:(NSUInteger)batchSize
-                 error:(NSError**)error;
+                 error:(NSError* __autoreleasing *)error;
 
 /**
  Finds an existing object for this class with the provided identifier value
@@ -106,7 +106,7 @@
 + (instancetype)existingObjectWithIdentifierValue:(id)value
                                         inContext:(NSManagedObjectContext*)moc
                                         withCache:(NSCache*)cache
-                                            error:(NSError**)error;
+                                            error:(NSError* __autoreleasing *)error;
 
 /**
  Finds an existing object for this class with the provided identifier value
@@ -121,6 +121,6 @@
 + (NSArray*)existingObjectsWithIdentifierCollection:(NSArray*)identifierCollection
                                           inContext:(NSManagedObjectContext*)moc
                                           withCache:(NSCache*)cache
-                                              error:(NSError**)error;
+                                              error:(NSError* __autoreleasing *)error;
 
 @end

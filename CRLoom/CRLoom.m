@@ -62,4 +62,8 @@
     return context;
 }
 
+- (void)dealloc {
+    self.moc = nil;
+}
+
 @end

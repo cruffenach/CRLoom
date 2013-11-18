@@ -32,12 +32,12 @@ SEL NSManagedObjectImportSelector() {
 
 @interface NSManagedObjectImportOperation ()
 @property (nonatomic, assign) BOOL guaranteedInsert;
-@property (nonatomic, retain) NSManagedObjectContext *moc;
-@property (nonatomic, retain) NSArray *data;
+@property (nonatomic, strong) NSManagedObjectContext *moc;
+@property (nonatomic, strong) NSArray *data;
 @property (nonatomic, assign) Class targetClass;
 @property (nonatomic, assign) NSUInteger batchSize;
 @property (nonatomic, assign) BOOL useCache;
-@property (nonatomic, retain) NSError *error;
+@property (nonatomic, assign) NSError* __autoreleasing *error;
 @end
 
 @implementation NSManagedObjectImportOperation
@@ -47,7 +47,7 @@ SEL NSManagedObjectImportSelector() {
        guaranteedInsert:(BOOL)guaranteedInsert
         saveOnBatchSize:(NSUInteger)batchSize
                useCache:(BOOL)useCache
-                  error:(NSError**)error {
+                  error:(NSError* __autoreleasing *)error {
     NSManagedObjectImportOperation *op = [[self alloc] initWithData:data
                                                  managedObjectClass:class
                                                    guaranteedInsert:guaranteedInsert
@@ -62,7 +62,7 @@ managedObjectClass:(Class)class
   guaranteedInsert:(BOOL)guaranteedInsert
    saveOnBatchSize:(NSUInteger)batchSize
           useCache:(BOOL)useCache
-             error:(NSError**)error {
+             error:(NSError* __autoreleasing *)error {
     self = [super init];
     if (self) {
         self.data = data;
@@ -70,9 +70,15 @@ managedObjectClass:(Class)class
         self.guaranteedInsert = guaranteedInsert;
         self.batchSize = batchSize;
         self.useCache = useCache;
-        self.error = *error;
+        self.error = error;
     }
     return self;
+}
+
+- (void)dealloc {
+    self.moc = nil;
+    self.data = nil;
+    self.error = nil;
 }
 
 - (void)main {
@@ -88,7 +94,7 @@ managedObjectClass:(Class)class
     SEL importSelector = NSManagedObjectImportSelector();
     if (class_getClassMethod(self.targetClass, importSelector) != NULL) {
         NSCache *cache = self.useCache ? [[NSCache alloc] init] : nil ;
-        objc_msgSend(self.targetClass, importSelector, self.data, self.moc, cache, self.guaranteedInsert, self.batchSize, &_error);
+        objc_msgSend(self.targetClass, importSelector, self.data, self.moc, cache, self.guaranteedInsert, self.batchSize, self.error);
     } else {
         NSAssert(NO, @"The object of type %@ supplied to NSManagedObjectImportOperation doesn't respond to %@", NSStringFromClass(self.targetClass), NSStringFromSelector(importSelector));
     }
