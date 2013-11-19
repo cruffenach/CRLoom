@@ -78,7 +78,6 @@ managedObjectClass:(Class)class
 - (void)dealloc {
     self.moc = nil;
     self.data = nil;
-    self.error = nil;
 }
 
 - (void)main {
