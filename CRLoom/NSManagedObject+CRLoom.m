@@ -10,6 +10,9 @@
 
 #define CRAssertSubclassShouldImplementMethod() NSAssert1(false, @"%s: Error: Your subclass must implement this method", __PRETTY_FUNCTION__);
 
+BOOL CRShouldSaveContext(NSManagedObjectContext *moc) {
+    return moc.insertedObjects.count||moc.updatedObjects.count||moc.deletedObjects.count;
+}
 NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierKey);
 NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierKey) {
     return [data valueForKeyPath:[NSString stringWithFormat:@"@distinctUnionOfObjects.%@", identifierKey]];
@@ -229,7 +232,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
     if (![object isIdenticalToData:data]) {
         [object updateWithData:data intoContext:moc withCache:cache error:error];
     }
-    return saveOnCompletion ? [moc save:error] ? object : nil : object;
+    return (CRShouldSaveContext(moc) && saveOnCompletion) ? [moc save:error] ? object : nil : object;
 }
 
 + (NSArray*)importDataCollection:(NSArray*)data
@@ -262,7 +265,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
         }
         objectsAvailableToSave++;
         
-        if (batchSize > 0 && objectsAvailableToSave == batchSize) {
+        if (CRShouldSaveContext(moc) && batchSize > 0 && objectsAvailableToSave == batchSize) {
             if (![moc save:error]) {
                 break;
             }
@@ -270,7 +273,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
         }
     }
     
-    return batchSize != 0 ? [moc save:error] ? [NSArray arrayWithArray:returnObjects] : nil : [NSArray arrayWithArray:returnObjects];
+    return (CRShouldSaveContext(moc) && batchSize != 0) ? [moc save:error] ? [NSArray arrayWithArray:returnObjects] : nil : [NSArray arrayWithArray:returnObjects];
 }
 
 #pragma mark - Public Interface
