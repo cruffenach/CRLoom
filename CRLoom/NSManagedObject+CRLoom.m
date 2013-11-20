@@ -229,7 +229,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
     if (!object) {
         return nil;
     }
-    if (![object isIdenticalToData:data]) {
+    if (guaranteedInsert || ![object isIdenticalToData:data]) {
         [object updateWithData:data intoContext:moc withCache:cache error:error];
     }
     return (CRShouldSaveContext(moc) && saveOnCompletion) ? [moc save:error] ? object : nil : object;
@@ -254,7 +254,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
     NSUInteger objectsAvailableToSave = 0;
     for (NSDictionary *objectData in data) {
         NSManagedObject *object = objects[objectData[[self uniqueDataIdentifierKey]]];
-        if (![object isIdenticalToData:objectData]) {
+        if (guaranteedInsert || ![object isIdenticalToData:objectData]) {
             if ([object updateWithData:objectData intoContext:moc withCache:cache error:error]) {
                 [returnObjects addObject:object];
             } else {
