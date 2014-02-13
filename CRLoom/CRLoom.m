@@ -8,10 +8,10 @@
 
 #import "CRLoom.h"
 
-#define CRLogCoreDataNote(note) NSLog(@"Inserted: %d Modified: %d Deleted: %d", \
-                                        [note.userInfo[@"inserted"] count],     \
-                                        [note.userInfo[@"updated"] count],      \
-                                        [note.userInfo[@"deleted"] count])
+#define CRLogCoreDataNote(note) NSLog(@"Inserted: %@ Modified: %@ Deleted: %@", \
+                                        @([note.userInfo[@"inserted"] count]),  \
+                                        @([note.userInfo[@"updated"] count]),   \
+                                        @([note.userInfo[@"deleted"] count]))
 
 
 @interface CRLoom ()
