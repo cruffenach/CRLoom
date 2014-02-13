@@ -93,7 +93,13 @@ managedObjectClass:(Class)class
     SEL importSelector = NSManagedObjectImportSelector();
     if (class_getClassMethod(self.targetClass, importSelector) != NULL) {
         NSCache *cache = self.useCache ? [[NSCache alloc] init] : nil ;
-        objc_msgSend(self.targetClass, importSelector, self.data, self.moc, cache, self.guaranteedInsert, self.batchSize, self.error);
+        [self.targetClass importData:self.data
+                         intoContext:self.moc
+                           withCache:cache
+                    guaranteedInsert:self.guaranteedInsert
+                     saveOnBatchSize:self.batchSize
+                               error:self.error];
+//        objc_msgSend(self.targetClass, importSelector, self.data, self.moc, cache, self.guaranteedInsert, self.batchSize, self.error);
     } else {
         NSAssert(NO, @"The object of type %@ supplied to NSManagedObjectImportOperation doesn't respond to %@", NSStringFromClass(self.targetClass), NSStringFromSelector(importSelector));
     }
