@@ -1,6 +1,6 @@
 //
 //  CRLoom.m
-//  
+//
 //
 //  Created by Collin Ruffenach on 7/20/13.
 //
@@ -9,9 +9,9 @@
 #import "CRLoom.h"
 
 #define CRLogCoreDataNote(note) NSLog(@"Inserted: %@ Modified: %@ Deleted: %@", \
-                                        @([note.userInfo[@"inserted"] count]),  \
-                                        @([note.userInfo[@"updated"] count]),   \
-                                        @([note.userInfo[@"deleted"] count]))
+@([note.userInfo[@"inserted"] count]),  \
+@([note.userInfo[@"updated"] count]),   \
+@([note.userInfo[@"deleted"] count]))
 
 
 @interface CRLoom ()
@@ -24,16 +24,18 @@
     _moc = moc;
     __block CRLoom *blockSelf = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification* note) {
-        CRLogCoreDataNote(note);
-
-        //Fix for bug where NSFetchedResultsControllerDelegate's controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:
-        //isn't called when updates come in from a Managed Object Context on another thread.
-        //http://stackoverflow.com/questions/14018068/nsfetchedresultscontroller-doesnt-call-controllerdidchangecontent-after-update
-        for(NSManagedObject *object in [[note userInfo] objectForKey:NSUpdatedObjectsKey]) {
-            [[blockSelf.moc objectWithID:[object objectID]] willAccessValueForKey:nil];
+        if (note.object != [CRLoom mainThreadContext]) {
+            CRLogCoreDataNote(note);
+            
+            //Fix for bug where NSFetchedResultsControllerDelegate's controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:
+            //isn't called when updates come in from a Managed Object Context on another thread.
+            //http://stackoverflow.com/questions/14018068/nsfetchedresultscontroller-doesnt-call-controllerdidchangecontent-after-update
+            for(NSManagedObject *object in [[note userInfo] objectForKey:NSUpdatedObjectsKey]) {
+                [[blockSelf.moc objectWithID:[object objectID]] willAccessValueForKey:nil];
+            }
+            
+            [blockSelf.moc mergeChangesFromContextDidSaveNotification:note];
         }
-        
-        [blockSelf.moc mergeChangesFromContextDidSaveNotification:note];
     }];
 }
 
@@ -48,7 +50,7 @@
     if (context.concurrencyType != NSMainQueueConcurrencyType) {
         NSLog(@"Error setting context, must be context with concurrency type NSMainQueueConcurrencyType");
         return;
-    }    
+    }
     [[self loom] setMoc:context];
 }
 
