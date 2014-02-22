@@ -81,9 +81,16 @@ managedObjectClass:(Class)class
 }
 
 - (void)main {
+    __block NSManagedObjectImportOperation *blockSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSError *error = nil;
+        if (![[CRLoom mainThreadContext] save:&error]) {
+            NSLog(@"[CRLOOM] ERROR SAVING MAIN THEAD MANAGED OBJECT CONTEXT BEFORE IMPORTING DATA FOR CLASS %@", NSStringFromClass(blockSelf.targetClass));
+        }
+    });
+    
     self.moc = [CRLoom privateContext];
     self.moc.undoManager = nil;
-    __block NSManagedObjectImportOperation *blockSelf = self;
     [self.moc performBlockAndWait:^{
         [blockSelf import];
     }];
@@ -99,7 +106,6 @@ managedObjectClass:(Class)class
                     guaranteedInsert:self.guaranteedInsert
                      saveOnBatchSize:self.batchSize
                                error:self.error];
-//        objc_msgSend(self.targetClass, importSelector, self.data, self.moc, cache, self.guaranteedInsert, self.batchSize, self.error);
     } else {
         NSAssert(NO, @"The object of type %@ supplied to NSManagedObjectImportOperation doesn't respond to %@", NSStringFromClass(self.targetClass), NSStringFromSelector(importSelector));
     }
