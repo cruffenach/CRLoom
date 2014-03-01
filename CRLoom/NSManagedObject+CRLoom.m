@@ -299,12 +299,13 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                           saveOnBatchSize:batchSize
                                     error:error];
     } else if ([data isKindOfClass:[NSDictionary class]]) {
-        return @[[self importObject:data
-                        intoContext:moc
-                          withCache:cache
-                   guaranteedInsert:guaranteedInsert
-                   saveOnCompletion:(batchSize != 0)
-                              error:error]];
+        id object = [self importObject:data
+                           intoContext:moc
+                             withCache:cache
+                      guaranteedInsert:guaranteedInsert
+                      saveOnCompletion:(batchSize != 0)
+                                 error:error];
+        return object ? @[object] : nil;
     }
     
     if (error) {
@@ -320,6 +321,12 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                                         inContext:(NSManagedObjectContext*)moc
                                         withCache:(NSCache*)cache
                                             error:(NSError* __autoreleasing *)error {
+    if (!value) {
+        *error = [NSError errorWithDomain:@"com.CRLoom.query"
+                                     code:0
+                                 userInfo:@{@"description" : @"Called existingObjectWithIdentifierValue:inContext:withCache:error: with a nil value."}];
+        return nil;
+    }
     return [self findObjectWithData:@{[self uniqueDataIdentifierKey] : value}
                           inContext:moc
                           withCache:cache
