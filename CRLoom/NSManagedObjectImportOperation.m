@@ -14,20 +14,20 @@
 /**
  *  NSManagedObject implements.
  *
- *  + (id)importData:(id)data
- *       intoContext:(NSManagedObjectContext*)moc
- *         withCache:(NSCache*)cache
- *  guaranteedInsert:(BOOL)guaranteedInsert
- *   saveOnBatchSize:(NSUInteger)batchSize
- *             error:(NSError**)error
+ *  + (NSArray*)importData:(id)data
+ *             intoContext:(NSManagedObjectContext*)moc
+ *               withCache:(NSCache*)cache
+ *        guaranteedInsert:(BOOL)guaranteedInsert
+ *         saveOnBatchSize:(NSUInteger)batchSize
+ *    pruneExistingObjects:(BOOL)pruneExistingObjects
+ *                   error:(NSError* __autoreleasing *)error
  *
  *  This is the method through which NSManagedObject's can be created and updated.
  */
 
 SEL NSManagedObjectImportSelector();
 SEL NSManagedObjectImportSelector() {
-    SEL importSelector = sel_registerName("importData:intoContext:withCache:guaranteedInsert:saveOnBatchSize:error:");
-    return importSelector;
+    return sel_registerName("importData:intoContext:withCache:guaranteedInsert:saveOnBatchSize:pruneExistingObjects:error:");
 }
 
 @interface NSManagedObjectImportOperation ()
@@ -36,39 +36,44 @@ SEL NSManagedObjectImportSelector() {
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, assign) Class targetClass;
 @property (nonatomic, assign) NSUInteger batchSize;
+@property (nonatomic, assign) BOOL pruneMissingObjects;
 @property (nonatomic, assign) BOOL useCache;
 @property (nonatomic, assign) NSError* __autoreleasing *error;
 @end
 
 @implementation NSManagedObjectImportOperation
 
-+ (id)operationWithData:(id)data
-     managedObjectClass:(Class)class
-       guaranteedInsert:(BOOL)guaranteedInsert
-        saveOnBatchSize:(NSUInteger)batchSize
-               useCache:(BOOL)useCache
-                  error:(NSError* __autoreleasing *)error {
++ (instancetype)operationWithData:(id)data
+               managedObjectClass:(Class)class
+                 guaranteedInsert:(BOOL)guaranteedInsert
+                  saveOnBatchSize:(NSUInteger)batchSize
+              pruneMissingObjects:(BOOL)pruneMissingObjects
+                         useCache:(BOOL)useCache
+                            error:(NSError* __autoreleasing *)error{
     NSManagedObjectImportOperation *op = [[self alloc] initWithData:data
                                                  managedObjectClass:class
                                                    guaranteedInsert:guaranteedInsert
                                                     saveOnBatchSize:batchSize
+                                                pruneMissingObjects:pruneMissingObjects
                                                            useCache:useCache
                                                               error:error];
     return op;
 }
 
-- (id)initWithData:(NSArray*)data
-managedObjectClass:(Class)class
-  guaranteedInsert:(BOOL)guaranteedInsert
-   saveOnBatchSize:(NSUInteger)batchSize
-          useCache:(BOOL)useCache
-             error:(NSError* __autoreleasing *)error {
+- (instancetype)initWithData:(NSArray*)data
+          managedObjectClass:(Class)class
+            guaranteedInsert:(BOOL)guaranteedInsert
+             saveOnBatchSize:(NSUInteger)batchSize
+         pruneMissingObjects:(BOOL)pruneMissingObjects
+                    useCache:(BOOL)useCache
+                       error:(NSError* __autoreleasing *)error {
     self = [super init];
     if (self) {
         self.data = data;
         self.targetClass = class;
         self.guaranteedInsert = guaranteedInsert;
         self.batchSize = batchSize;
+        self.pruneMissingObjects = pruneMissingObjects;
         self.useCache = useCache;
         self.error = error;
     }
@@ -105,6 +110,7 @@ managedObjectClass:(Class)class
                            withCache:cache
                     guaranteedInsert:self.guaranteedInsert
                      saveOnBatchSize:self.batchSize
+                pruneExistingObjects:self.pruneMissingObjects
                                error:self.error];
     } else {
         NSAssert(NO, @"The object of type %@ supplied to NSManagedObjectImportOperation doesn't respond to %@", NSStringFromClass(self.targetClass), NSStringFromSelector(importSelector));

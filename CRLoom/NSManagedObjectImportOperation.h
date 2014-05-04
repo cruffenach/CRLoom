@@ -10,10 +10,11 @@
 
 @interface NSManagedObjectImportOperation : NSOperation
 
-+ (id)operationWithData:(id)data
++ (instancetype)operationWithData:(id)data
      managedObjectClass:(Class)class
        guaranteedInsert:(BOOL)guaranteedInsert
         saveOnBatchSize:(NSUInteger)batchSize
+    pruneMissingObjects:(BOOL)pruneMissingObjects
                useCache:(BOOL)useCache
                   error:(NSError* __autoreleasing *)error;
 

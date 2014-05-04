@@ -91,6 +91,7 @@
              withCache:(NSCache*)cache
       guaranteedInsert:(BOOL)guaranteedInsert
        saveOnBatchSize:(NSUInteger)batchSize
+  pruneExistingObjects:(BOOL)pruneExistingObjects
                  error:(NSError* __autoreleasing *)error;
 
 /**

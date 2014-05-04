@@ -139,6 +139,7 @@ void generateRandomData() {
                                                                                       managedObjectClass:[Job class]
                                                                                         guaranteedInsert:NO
                                                                                          saveOnBatchSize:25
+                                                                                     pruneMissingObjects:NO
                                                                                                 useCache:NO
                                                                                                    error:&error];
         
@@ -146,6 +147,7 @@ void generateRandomData() {
                                                                                                managedObjectClass:[Person class]
                                                                                                  guaranteedInsert:NO
                                                                                                   saveOnBatchSize:25
+                                                                                              pruneMissingObjects:NO
                                                                                                          useCache:useCache
                                                                                                             error:&error];
         NSOperationQueue *queue = [[NSOperationQueue alloc] init];
@@ -157,12 +159,14 @@ void generateRandomData() {
               withCache:nil
        guaranteedInsert:YES
         saveOnBatchSize:25
+   pruneExistingObjects:NO
                   error:&error];
         [Person importData:data[@"people"]
                intoContext:[self managedObjectContext]
                  withCache:nil
           guaranteedInsert:YES
            saveOnBatchSize:25
+      pruneExistingObjects:NO
                      error:&error];
     }
 }

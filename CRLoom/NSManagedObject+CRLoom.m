@@ -235,12 +235,30 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
     return (CRShouldSaveContext(moc) && saveOnCompletion) ? [moc save:error] ? object : nil : object;
 }
 
++ (void)prepareForImportOfData:(NSArray*)data
+                   intoContext:(NSManagedObjectContext*)moc
+                         error:(NSError* __autoreleasing *)error {
+    NSArray *idsToImport = [data valueForKeyPath:[@"distinctUnionOfObjects." stringByAppendingString:[self uniqueModelIdentifierKey]]];
+    NSArray *existingObjects = [[moc executeFetchRequest:[self emptyFetchRequest] error:error] mutableCopy];
+    existingObjects = [existingObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return [idsToImport containsObject:[evaluatedObject valueForKey:[self uniqueModelIdentifierKey]]];
+    }]];
+    [existingObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [moc delete:obj];
+    }];
+}
+
 + (NSArray*)importDataCollection:(NSArray*)data
                      intoContext:(NSManagedObjectContext*)moc
                        withCache:(NSCache*)cache
                 guaranteedInsert:(BOOL)guaranteedInsert
                  saveOnBatchSize:(NSUInteger)batchSize
+            pruneExistingObjects:(BOOL)pruneExistingObjects
                            error:(NSError* __autoreleasing *)error {
+    
+    [self prepareForImportOfData:data
+                     intoContext:moc
+                           error:error];
     
     NSDictionary *objects = guaranteedInsert ?
     [self createObjectsWithData:data inContext:moc withCache:cache] :
@@ -283,6 +301,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
              withCache:(NSCache*)cache
       guaranteedInsert:(BOOL)guaranteedInsert
        saveOnBatchSize:(NSUInteger)batchSize
+  pruneExistingObjects:(BOOL)pruneExistingObjects
                  error:(NSError* __autoreleasing *)error {
     
     if (!data) return nil;
@@ -297,6 +316,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                                 withCache:cache
                          guaranteedInsert:guaranteedInsert
                           saveOnBatchSize:batchSize
+                     pruneExistingObjects:pruneExistingObjects
                                     error:error];
     } else if ([data isKindOfClass:[NSDictionary class]]) {
         id object = [self importObject:data
