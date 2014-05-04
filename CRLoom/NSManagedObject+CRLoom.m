@@ -163,9 +163,9 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 #pragma mark - Find or Create Objects
 
 + (NSManagedObject*)findOrCreateObjectWithData:(NSDictionary*)data
-                                    inContext:(NSManagedObjectContext*)moc
-                                    withCache:(NSCache*)cache
-                                        error:(NSError* __autoreleasing *)error {
+                                     inContext:(NSManagedObjectContext*)moc
+                                     withCache:(NSCache*)cache
+                                         error:(NSError* __autoreleasing *)error {
     __autoreleasing NSError *myError = nil;
     
     //I want to ensure I find out about an error that occurs in findObjectWithData:inContext:error: even if the user
@@ -217,11 +217,11 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 #pragma mark - Import Objects
 
 + (NSManagedObject*)importObject:(NSDictionary*)data
-                    intoContext:(NSManagedObjectContext*)moc
-                      withCache:(NSCache*)cache
-               guaranteedInsert:(BOOL)guaranteedInsert
-               saveOnCompletion:(BOOL)saveOnCompletion
-                          error:(NSError* __autoreleasing *)error {
+                     intoContext:(NSManagedObjectContext*)moc
+                       withCache:(NSCache*)cache
+                guaranteedInsert:(BOOL)guaranteedInsert
+                saveOnCompletion:(BOOL)saveOnCompletion
+                           error:(NSError* __autoreleasing *)error {
     
     NSManagedObject *object = guaranteedInsert ?
     [self createObjectInContext:moc] :
@@ -238,13 +238,13 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 + (void)prepareForImportOfData:(NSArray*)data
                    intoContext:(NSManagedObjectContext*)moc
                          error:(NSError* __autoreleasing *)error {
-    NSArray *idsToImport = [data valueForKeyPath:[@"distinctUnionOfObjects." stringByAppendingString:[self uniqueModelIdentifierKey]]];
+    NSArray *idsToImport = [data valueForKeyPath:[@"@distinctUnionOfObjects." stringByAppendingString:[self uniqueDataIdentifierKey]]];
     NSArray *existingObjects = [[moc executeFetchRequest:[self emptyFetchRequest] error:error] mutableCopy];
-    existingObjects = [existingObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return [idsToImport containsObject:[evaluatedObject valueForKey:[self uniqueModelIdentifierKey]]];
+    NSArray *objectsToDelete = [existingObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return ![idsToImport containsObject:[evaluatedObject valueForKey:[self uniqueModelIdentifierKey]]];
     }]];
-    [existingObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [moc delete:obj];
+    [objectsToDelete enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [moc deleteObject:obj];
     }];
 }
 
@@ -256,9 +256,11 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
             pruneExistingObjects:(BOOL)pruneExistingObjects
                            error:(NSError* __autoreleasing *)error {
     
-    [self prepareForImportOfData:data
-                     intoContext:moc
-                           error:error];
+    if (pruneExistingObjects) {
+        [self prepareForImportOfData:data
+                         intoContext:moc
+                               error:error];
+    }
     
     NSDictionary *objects = guaranteedInsert ?
     [self createObjectsWithData:data inContext:moc withCache:cache] :
