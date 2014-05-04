@@ -240,10 +240,9 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                          error:(NSError* __autoreleasing *)error {
     NSArray *idsToImport = [data valueForKeyPath:[@"@distinctUnionOfObjects." stringByAppendingString:[self uniqueDataIdentifierKey]]];
     NSArray *existingObjects = [[moc executeFetchRequest:[self emptyFetchRequest] error:error] mutableCopy];
-    NSArray *objectsToDelete = [existingObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    [[existingObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return ![idsToImport containsObject:[evaluatedObject valueForKey:[self uniqueModelIdentifierKey]]];
-    }]];
-    [objectsToDelete enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    }]] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [moc deleteObject:obj];
     }];
 }
