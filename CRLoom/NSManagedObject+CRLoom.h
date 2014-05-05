@@ -82,6 +82,12 @@
  @param batchSize The numbers of objects processed that should trigger a save to the 
  managed object context. A value of 0 will have no save occur, a value of NSUIntegerMax
  will have 1 save occur after processing all objects.
+ @param pruneExistingObjects Whether or not the data should be treated as a full GET and
+ delete local objects that are not present. Sometimes API's won't specify deletes, API's
+ simpily provide a full get from an API and any object existing locally, that is not in 
+ the response from the API should be deleted, setting pruneExistingObjects will delete
+ any local NSManagedObject instances of this type that aren't present in the data being
+ imported
  @param error An error pointer that will be returned hydrated if there is any problem
  @return An array of the objects created
  */
