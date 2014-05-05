@@ -163,9 +163,9 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 #pragma mark - Find or Create Objects
 
 + (NSManagedObject*)findOrCreateObjectWithData:(NSDictionary*)data
-                                    inContext:(NSManagedObjectContext*)moc
-                                    withCache:(NSCache*)cache
-                                        error:(NSError* __autoreleasing *)error {
+                                     inContext:(NSManagedObjectContext*)moc
+                                     withCache:(NSCache*)cache
+                                         error:(NSError* __autoreleasing *)error {
     __autoreleasing NSError *myError = nil;
     
     //I want to ensure I find out about an error that occurs in findObjectWithData:inContext:error: even if the user
@@ -217,11 +217,11 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
 #pragma mark - Import Objects
 
 + (NSManagedObject*)importObject:(NSDictionary*)data
-                    intoContext:(NSManagedObjectContext*)moc
-                      withCache:(NSCache*)cache
-               guaranteedInsert:(BOOL)guaranteedInsert
-               saveOnCompletion:(BOOL)saveOnCompletion
-                          error:(NSError* __autoreleasing *)error {
+                     intoContext:(NSManagedObjectContext*)moc
+                       withCache:(NSCache*)cache
+                guaranteedInsert:(BOOL)guaranteedInsert
+                saveOnCompletion:(BOOL)saveOnCompletion
+                           error:(NSError* __autoreleasing *)error {
     
     NSManagedObject *object = guaranteedInsert ?
     [self createObjectInContext:moc] :
@@ -235,12 +235,31 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
     return (CRShouldSaveContext(moc) && saveOnCompletion) ? [moc save:error] ? object : nil : object;
 }
 
++ (void)prepareForImportOfData:(NSArray*)data
+                   intoContext:(NSManagedObjectContext*)moc
+                         error:(NSError* __autoreleasing *)error {
+    NSArray *idsToImport = [data valueForKeyPath:[@"@distinctUnionOfObjects." stringByAppendingString:[self uniqueDataIdentifierKey]]];
+    NSArray *existingObjects = [[moc executeFetchRequest:[self emptyFetchRequest] error:error] mutableCopy];
+    [[existingObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return ![idsToImport containsObject:[evaluatedObject valueForKey:[self uniqueModelIdentifierKey]]];
+    }]] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [moc deleteObject:obj];
+    }];
+}
+
 + (NSArray*)importDataCollection:(NSArray*)data
                      intoContext:(NSManagedObjectContext*)moc
                        withCache:(NSCache*)cache
                 guaranteedInsert:(BOOL)guaranteedInsert
                  saveOnBatchSize:(NSUInteger)batchSize
+            pruneExistingObjects:(BOOL)pruneExistingObjects
                            error:(NSError* __autoreleasing *)error {
+    
+    if (pruneExistingObjects) {
+        [self prepareForImportOfData:data
+                         intoContext:moc
+                               error:error];
+    }
     
     NSDictionary *objects = guaranteedInsert ?
     [self createObjectsWithData:data inContext:moc withCache:cache] :
@@ -283,6 +302,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
              withCache:(NSCache*)cache
       guaranteedInsert:(BOOL)guaranteedInsert
        saveOnBatchSize:(NSUInteger)batchSize
+  pruneExistingObjects:(BOOL)pruneExistingObjects
                  error:(NSError* __autoreleasing *)error {
     
     if (!data) return nil;
@@ -297,6 +317,7 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                                 withCache:cache
                          guaranteedInsert:guaranteedInsert
                           saveOnBatchSize:batchSize
+                     pruneExistingObjects:pruneExistingObjects
                                     error:error];
     } else if ([data isKindOfClass:[NSDictionary class]]) {
         id object = [self importObject:data

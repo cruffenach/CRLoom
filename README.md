@@ -7,12 +7,13 @@ CRLoom is a framework for helping with the import, update and querying of `NSMan
 ### `NSManagedObjectImportOperation`
 This is an `NSOperation` subclass that created via
 ```Objective-C
-+ (id)operationWithData:(id)data
-     managedObjectClass:(Class)class
-       guaranteedInsert:(BOOL)guaranteedInsert
-        saveOnBatchSize:(NSUInteger)batchSize
-               useCache:(BOOL)useCache
-                  error:(NSError* __autoreleasing *)error;
++ (instanceType)operationWithData:(id)data
+               managedObjectClass:(Class)class
+                 guaranteedInsert:(BOOL)guaranteedInsert
+                  saveOnBatchSize:(NSUInteger)batchSize
+							pruneMissingObjects:(BOOL)pruneMissingObjects
+                         useCache:(BOOL)useCache
+                            error:(NSError* __autoreleasing *)error;
 ```
 This operation can be added to an `NSOperationQueue` and will thread the work of importing the data. Setting `useCache` to `YES` will have the operation provide an `NSCache` to the thread doing the import work that will be used as a first layer to check to find existing objects before entire fetch requests are used.
 
