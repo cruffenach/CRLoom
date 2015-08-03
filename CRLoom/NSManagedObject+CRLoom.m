@@ -235,23 +235,16 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
     return (CRShouldSaveContext(moc) && saveOnCompletion) ? [moc save:error] ? object : nil : object;
 }
 
-+ (BOOL)prepareForImportOfData:(NSArray*)data
++ (void)prepareForImportOfData:(NSArray*)data
                    intoContext:(NSManagedObjectContext*)moc
                          error:(NSError* __autoreleasing *)error {
     NSArray *idsToImport = [data valueForKeyPath:[@"@distinctUnionOfObjects." stringByAppendingString:[self uniqueDataIdentifierKey]]];
     NSArray *existingObjects = [[moc executeFetchRequest:[self emptyFetchRequest] error:error] mutableCopy];
-    
-    if (error && *error != nil) {
-        return NO;
-    }
-    
     [[existingObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return ![idsToImport containsObject:[evaluatedObject valueForKey:[self uniqueModelIdentifierKey]]];
     }]] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [moc deleteObject:obj];
     }];
-    
-    return YES;
 }
 
 + (NSArray*)importDataCollection:(NSArray*)data
@@ -263,11 +256,9 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                            error:(NSError* __autoreleasing *)error {
     
     if (pruneExistingObjects) {
-        if (![self prepareForImportOfData:data
-                              intoContext:moc
-                                    error:error]) {
-            return nil;
-        }
+        [self prepareForImportOfData:data
+                         intoContext:moc
+                               error:error];
     }
     
     NSDictionary *objects = guaranteedInsert ?
@@ -352,11 +343,9 @@ NSArray * CRIdentifierValuesFromDataWithKey(NSArray *data, NSString *identifierK
                                         withCache:(NSCache*)cache
                                             error:(NSError* __autoreleasing *)error {
     if (!value) {
-        if (error) {
-            *error = [NSError errorWithDomain:@"com.CRLoom.query"
-                                         code:0
-                                     userInfo:@{@"description" : @"Called existingObjectWithIdentifierValue:inContext:withCache:error: with a nil value."}];
-        }
+        *error = [NSError errorWithDomain:@"com.CRLoom.query"
+                                     code:0
+                                 userInfo:@{@"description" : @"Called existingObjectWithIdentifierValue:inContext:withCache:error: with a nil value."}];
         return nil;
     }
     return [self findObjectWithData:@{[self uniqueDataIdentifierKey] : value}
